@@ -4,14 +4,20 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <div>
-      <NavLink to="/">Mini <span>Blog</span></NavLink>
-      <ul>
+    <div className={styles.navbar}>
+      <NavLink to="/" className={styles.brand}>Mini <span>Blog</span></NavLink>
+      <ul className={styles.link_list}>
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/" className={({ isActive }) => (isActive ? styles.active : undefined)} >Home</NavLink>
         </li>
         <li>
-          <NavLink to="/about">Sobre</NavLink>
+          <NavLink to="/login" className={({ isActive }) => (isActive ? styles.active : undefined)} >Login</NavLink>
+        </li>
+        <li>
+          <NavLink to="/register" className={({ isActive }) => (isActive ? styles.active : undefined)} >Cadastrar</NavLink>
+        </li>
+        <li>
+          <NavLink to="/about" className={({ isActive }) => (isActive ? styles.active : undefined)} >Sobre</NavLink>
         </li>
       </ul>
     </div>
