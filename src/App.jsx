@@ -1,26 +1,50 @@
 import './App.css'
 
-import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
 
-//Context
-import { AuthProvider } from './context/AuthContext'
+//hooks
+import { useState, useEffect } from 'react';
+import { useAuthentication } from './hooks/useAutentication';
+
+//Context'
+import { AuthProvider } from './context/AuthContext';
 
 //Pages
-import Home from './pages/Home/Home'
-import About from './pages/About/About'
-import Login from './pages/Login/Login'
-import Register from './pages/Register/Register'
+import Home from './pages/Home/Home';
+import About from './pages/About/About';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+import Dashboard from './pages/Dashboard/Dashboard';
+import CreatePost from './pages/CreatePost/CreatePost';
 
 //components
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
 
 function App() {
   
+  const [user, setUser] = useState(undefined);
+  const {auth} = useAuthentication();
+
+  const loadingUser = user === undefined;
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  }, [auth]);
+
+  if(loadingUser){
+    return <p>Carregando...</p>
+  }
+
+
 
   return (
     <div className='App'>
-      <AuthProvider>
+      <AuthProvider value={ user }>
         <BrowserRouter>
           <Navbar/>
           <div className='container'>
@@ -30,6 +54,8 @@ function App() {
               <Route path='/login' element={<Login/>}/>
               <Route path='/register' element={<Register/>}/>
               <Route path='*' element={<Navigate to='/'/>}/>
+              <Route path='/dashboard' element={<Dashboard/>}/>
+              <Route path='/posts/create' element={<CreatePost/>}/>
             </Routes>
           </div>
           <Footer/>
