@@ -17,7 +17,7 @@ textarea:focus {
 }
 
 a,
-nav button {
+nav, button {
     text-decoration: none;
     background-color: transparent;
     border: none;
