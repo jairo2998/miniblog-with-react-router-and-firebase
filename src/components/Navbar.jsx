@@ -6,7 +6,8 @@ import { useAuthentication } from '../hooks/useAutentication';
 import { useAuthValue } from '../context/AuthContext';
 
 const Navbar = () => {
-  const { user } = useAuthValue();
+  const { user } = useAuthValue();  
+  
   return (
     <div className={styles.navbar}>
       <NavLink to="/" className={styles.brand}>Mini <span>Blog</span></NavLink>
@@ -14,7 +15,7 @@ const Navbar = () => {
         <li>
           <NavLink to="/" className={({ isActive }) => (isActive ? styles.active : undefined)} >Home</NavLink>
         </li>
-        {user && (
+        {!user && (
           <>
             <li>
               <NavLink to="/login" className={({ isActive }) => (isActive ? styles.active : undefined)} >Login</NavLink>
