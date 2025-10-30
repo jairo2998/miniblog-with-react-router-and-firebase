@@ -42,14 +42,9 @@ const Navbar = () => {
           <NavLink to="/about" className={({ isActive }) => (isActive ? styles.active : undefined)} >Sobre</NavLink>
         </li>
         {user && (
-          <>
-          <li>
-            <span className={styles.logout}>Olá, {user.displayName}</span>
-          </li>
           <li>
             <button onClick={logout}>Sair</button>
-          </li>
-          </>
+          </li>         
         )}
       </ul>
     </div>
