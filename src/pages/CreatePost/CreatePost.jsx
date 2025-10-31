@@ -22,8 +22,7 @@ const CreatePost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("yeah, its here");
-    
+        
     setFormError("");
     // validate image URL
     
